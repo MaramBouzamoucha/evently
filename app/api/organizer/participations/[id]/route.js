@@ -38,6 +38,16 @@ export async function PATCH(req, { params }) {
           throw new Error("Capacité maximale atteinte pour cet événement");
         }
       }
+      if (status === "CONFIRMED") {
+      await tx.event.update({
+        where: { id: updatedParticipation.eventId },
+        data: {
+          capacity: {
+            decrement: 1 // <--- C'est cette commande qui change tout !
+          }
+        }
+      });
+    }
 
       // 3. Mettre à jour le statut
       return await tx.participation.update({
