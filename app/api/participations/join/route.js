@@ -48,7 +48,7 @@ export async function POST(req) {
       data: {
         userId: session.user.id,
         eventId: eventId,
-        status: "ACCEPTED" // Ou "PENDING" selon ta logique
+        status: "PENDING" // Ou "PENDING" selon ta logique
       }
     });
 
