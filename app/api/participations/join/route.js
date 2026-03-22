@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma"; // <--- ASSURE-TOI QUE CET IMPORT EST CORRECT
 export async function POST(req) {
   try {
     const session = await getServerSession(authOptions);
+    console.log("DEBUG SESSION:", session);
     
     // 1. Vérification de la session
     if (!session || !session.user?.id) {
