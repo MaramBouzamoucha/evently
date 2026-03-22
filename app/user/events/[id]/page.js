@@ -125,6 +125,7 @@ console.log("Participation ID:", userParticipation?.id);
     >
       {userParticipation.status === "PENDING"
         ? "⏳ En attente"
+        
         : "✅ Confirmé"}
     </div>
 

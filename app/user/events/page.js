@@ -564,7 +564,7 @@ export default function UserEventsPage() {
                   {event.participation ? (
   <div
     className={`event-status ${
-      event.participation.status === "ACCEPTED"
+      event.participation.status === "CONFIRMED"
         ? "event-status-accepted"
         : event.participation.status === "REJECTED"
         ? "event-status-rejected"
