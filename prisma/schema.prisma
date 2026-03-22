@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  engine   = "node-api"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  events    Event[]
+  participations Participation[] 
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        DateTime
+  location    String
+  image       String? 
+  price          Float?          // null ou 0 = Gratuit
+  capacity       Int?            // null = Illimité
+  categoryId   String?
+category     Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+organizerId  String?
+organizer    User?     @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  participations Participation[] 
+}
+
+enum Role {
+  ADMIN
+  ORGANIZER
+  USER
+}
+model Participation {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  status    Status   @default(PENDING) // PENDING, CONFIRMED, REJECTED
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId]) // Empêche un utilisateur de s'inscrire deux fois au même event
+}
+
+enum Status {
+  PENDING
+  CONFIRMED
+  REJECTED
+}
+model Category{
+  id          String   @id @default(cuid())
+  name      String
+  events    Event[]
+}
+
+

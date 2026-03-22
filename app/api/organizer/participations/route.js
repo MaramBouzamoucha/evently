@@ -1,0 +1,47 @@
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../lib/auth";
+
+const prisma = new PrismaClient();
+
+export async function GET() {
+  const session = await getServerSession(authOptions);
+
+  // Sécurité : Vérifier si c'est bien un organisateur
+  if (!session || session.user.role !== "ORGANIZER") {
+    return NextResponse.json({ message: "Accès refusé" }, { status: 403 });
+  }
+
+  try {
+    const participations = await prisma.participation.findMany({
+      where: {
+        event: {
+          organizerId: session.user.id, // Filtre par l'ID de l'organisateur connecté
+        },
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+        event: {
+          select: {
+            title: true,
+            date: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return NextResponse.json(participations);
+  } catch (error) {
+    console.error("Erreur participations:", error);
+    return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
+  }
+}
