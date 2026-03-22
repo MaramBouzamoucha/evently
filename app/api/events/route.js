@@ -1,31 +1,34 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../lib/prisma";
-import { getSession } from "../../lib/auth-utils";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../lib/auth";
 export async function GET() {
-  
-    // ✅ Correction : Attendre les params
-    const session = await getSession();
-    
-    const events = await prisma.event.findMany({
-      include: {
-        category: true,   // Important pour ne pas avoir d'erreur d'affichage
-        organizer: {
-          select: { name: true, email: true } // Sécurité : on ne prend pas le mot de passe
-        },
-        participations: {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json([], { status: 200 });
+  }
+
+  const events = await prisma.event.findMany({
+    include: {
+      category: true,
+      organizer: {
+        select: { name: true, email: true }
+      },
+      participations: {
         where: {
           userId: session.user.id,
         },
       },
-      },
-      orderBy: {
-        date: 'asc'
-      }
-    });
-    const formattedEvents = events.map((event) => ({
+    },
+    orderBy: {
+      date: "asc",
+    },
+  });
+
+  const formattedEvents = events.map((event) => ({
     ...event,
-    // On extrait la participation si elle existe
-    participation: event.participations[0] || null, 
+    participation: event.participations[0] || null,
   }));
 
   return NextResponse.json(formattedEvents);
