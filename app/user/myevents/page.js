@@ -54,7 +54,12 @@ export default function MyParticipations() {
                     fontWeight: 'bold',
                     ...getStatusStyle(p.status) 
                   }}>
-                    {p.status === "CONFIRMED" ? "Confirmé ✅" : "En attente ⏳"}
+                    {p.status === "CONFIRMED"
+  ? "Confirmé ✅"
+  : p.status === "REJECTED"
+  ? "Refusé ❌"
+  : "En attente ⏳"}
+  
                   </span>
                 </td>
                 <td>

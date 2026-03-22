@@ -562,25 +562,29 @@ export default function UserEventsPage() {
 
                   {/* Status or Join Button */}
                   {event.participation ? (
-                    <div
-                      className={`event-status ${
-                        event.participation.status === "ACCEPTED"
-                          ? "event-status-accepted"
-                          : "event-status-pending"
-                      }`}
-                    >
-                      {event.participation.status === "PENDING"
-                        ? "⏳ Demande envoyée"
-                        : "✅ Déjà inscrit"}
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => handleJoin(event.id)}
-                      className="event-btn event-btn-join"
-                    >
-                      Participer
-                    </button>
-                  )}
+  <div
+    className={`event-status ${
+      event.participation.status === "ACCEPTED"
+        ? "event-status-accepted"
+        : event.participation.status === "REJECTED"
+        ? "event-status-rejected"
+        : "event-status-pending"
+    }`}
+  >
+    {event.participation.status === "PENDING"
+      ? "⏳ Demande envoyée"
+      : event.participation.status === "REJECTED"
+      ? "❌ Refusé"
+      : "✅ Déjà inscrit"}
+  </div>
+) : (
+  <button
+    onClick={() => handleJoin(event.id)}
+    className="event-btn event-btn-join"
+  >
+    Participer
+  </button>
+)}
 
                   {/* Details Link */}
                   <Link href={`/user/events/${event.id}`}>
