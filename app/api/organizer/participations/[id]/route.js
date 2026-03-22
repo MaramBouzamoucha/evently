@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../lib/auth";
+import { prisma } from "../../../../lib/prisma";
 
-import {prisma} from "../../../../lib/prisma";
 export async function PATCH(req, { params }) {
   const session = await getServerSession(authOptions);
   const { id } = await params;
@@ -13,9 +13,7 @@ export async function PATCH(req, { params }) {
   }
 
   try {
-    // On utilise une transaction pour lier la vérification et la mise à jour
     const result = await prisma.$transaction(async (tx) => {
-      
       // 1. Récupérer la participation et les détails de l'événement
       const participation = await tx.participation.findUnique({
         where: { id },
@@ -24,32 +22,23 @@ export async function PATCH(req, { params }) {
 
       if (!participation) throw new Error("Participation introuvable");
 
-      // 2. Si l'organisateur confirme, on vérifie s'il reste de la place
+      // 2. Logique spécifique si on CONFIRME
       if (status === "CONFIRMED") {
-        // On compte combien sont déjà CONFIRMED pour cet événement
-        const confirmedCount = await tx.participation.count({
-          where: { 
-            eventId: participation.eventId, 
-            status: "CONFIRMED" 
-          }
-        });
-
-        if (confirmedCount >= participation.event.capacity) {
+        // Vérifier s'il reste de la place AVANT de décrémenter
+        if (participation.event.capacity <= 0) {
           throw new Error("Capacité maximale atteinte pour cet événement");
         }
-      }
-      if (status === "CONFIRMED") {
-      await tx.event.update({
-        where: { id: updatedParticipation.eventId },
-        data: {
-          capacity: {
-            decrement: 1 // <--- C'est cette commande qui change tout !
-          }
-        }
-      });
-    }
 
-      // 3. Mettre à jour le statut
+        // DECRÉMENTER la capacité de l'événement
+        await tx.event.update({
+          where: { id: participation.eventId },
+          data: {
+            capacity: { decrement: 1 }
+          }
+        });
+      }
+
+      // 3. Mettre à jour le statut du participant
       return await tx.participation.update({
         where: { id },
         data: { status },
