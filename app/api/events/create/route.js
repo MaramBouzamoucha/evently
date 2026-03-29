@@ -26,6 +26,7 @@ export async function POST(req) {
         image: image || "",
         location,
         capacity: Number(capacity),
+        placesRestantes: Number(capacity),
         price: Number(price),
         organizer: {
           connect: { id: session.user.id },
