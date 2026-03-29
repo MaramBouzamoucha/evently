@@ -198,7 +198,7 @@ export default function CreateEvent() {
 
           {/* Boutons */}
           <div className="flex justify-between items-center mt-4">
-            <Link href="/dashboard/organizer" className="text-gray-500 font-semibold hover:underline">Annuler</Link>
+            <Link href="/organizer" className="text-gray-500 font-semibold hover:underline">Annuler</Link>
             <button
               type="submit"
               disabled={loading}
