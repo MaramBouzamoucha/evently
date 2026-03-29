@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
-
 import { revalidatePath } from "next/cache";
-
-
 export async function GET(req, { params }) {
   try {
     const { id } = await params;
@@ -26,28 +23,21 @@ export async function GET(req, { params }) {
 }
 export async function PATCH(req, { params }) {
   try {
-    // 1. On récupère l'ID (il faut await params dans les dernières versions)
     const { id } = await params; 
 
     if (!id) {
       return NextResponse.json({ error: "ID manquant" }, { status: 400 });
     }
-
-    // 2. On récupère le corps de la requête
     let { name, email, role } = await req.json();
 
     if (!name || !email || !role) {
       return NextResponse.json({ error: "Tous les champs sont obligatoires" }, { status: 400 });
     }
-
-    // 3. Traitement du rôle
     role = role.toUpperCase();
     const validRoles = ["ADMIN", "USER", "ORGANIZER"];
     if (!validRoles.includes(role)) {
       return NextResponse.json({ error: "Rôle invalide" }, { status: 400 });
     }
-
-    // 4. Mise à jour dans Prisma
     const updatedUser = await prisma.user.update({
       where: { id },
       data: { name, email, role },
@@ -60,14 +50,13 @@ export async function PATCH(req, { params }) {
   }}
   export async function DELETE(req, { params }) {
   try {
-    // 1. Récupération de l'ID
+   
     const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ error: "ID manquant" }, { status: 400 });
     }
 
-    // 2. Vérification si l'utilisateur existe (optionnel mais recommandé)
     const userExists = await prisma.user.findUnique({
       where: { id },
     });
@@ -76,7 +65,6 @@ export async function PATCH(req, { params }) {
       return NextResponse.json({ error: "Utilisateur non trouvé" }, { status: 404 });
     }
 
-    // 3. Suppression
     await prisma.user.delete({
       where: { id },
     });
@@ -99,6 +87,5 @@ export async function PATCH(req, { params }) {
   await prisma.user.delete({
     where: { id: userId },
   });
-  // Force Next.js à rafraîchir la liste des utilisateurs sans recharger la page
   revalidatePath("/admin/users"); 
 }

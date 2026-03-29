@@ -112,7 +112,6 @@ export default async function AdminDashboard() {
 
         <div style={styles.grid}>
 
-          {/* USERS */}
           <div style={styles.card}>
             <div style={styles.iconBox("#eef2ff")}>👥</div>
 
@@ -124,7 +123,6 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
-          {/* ORGANIZERS */}
           <div style={styles.card}>
             <div style={styles.iconBox("#fef3c7")}>🎤</div>
 
@@ -135,8 +133,6 @@ export default async function AdminDashboard() {
               </span>
             </div>
           </div>
-
-          {/* EVENTS */}
           <div style={styles.card}>
             <div style={styles.iconBox("#dcfce7")}>📅</div>
 
@@ -147,8 +143,6 @@ export default async function AdminDashboard() {
               </span>
             </div>
           </div>
-
-          {/* UPCOMING EVENTS */}
           <div style={styles.card}>
             <div style={styles.iconBox("#ffe4e6")}>🚀</div>
 
@@ -161,11 +155,6 @@ export default async function AdminDashboard() {
           </div>
 
         </div>
-
-       
-         
-       
-
       </div>
     </div>
   );

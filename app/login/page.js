@@ -30,13 +30,9 @@ export default function LoginPage() {
       return;
     }
 
-    // 🔥 récupérer session avec rôle
     const sessionRes = await fetch("/api/auth/session");
     const session = await sessionRes.json();
-
     const role = session?.user?.role;
-
-    // 🎯 redirection intelligente
     if (role === "ADMIN") {
       router.push("/admin");
     } else if (role === "ORGANIZER") {
@@ -45,27 +41,21 @@ export default function LoginPage() {
       router.push("/user/events");
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
 
-        {/* HEADER */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800">🔐 Connexion</h1>
           <p className="text-gray-500 text-sm mt-2">
             Connectez-vous à Evently
           </p>
         </div>
-
-        {/* ERROR */}
         {error && (
           <div className="mb-4 p-3 rounded-lg bg-red-100 text-red-700 text-sm">
             {error}
           </div>
         )}
-
-        {/* FORM */}
         <form onSubmit={handleLogin} className="space-y-4">
 
           <div>
@@ -104,8 +94,6 @@ export default function LoginPage() {
             {loading ? "Connexion..." : "Se connecter"}
           </button>
         </form>
-
-        {/* FOOTER */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Pas encore de compte ?{" "}
           <Link href="/register" className="text-blue-600 hover:underline">

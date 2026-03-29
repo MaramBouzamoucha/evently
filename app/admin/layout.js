@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
 
-  // Configuration des liens pour faciliter la maintenance
   const navLinks = [
     { name: "Dashboard", href: "/admin", icon: "📊" },
     { name: "Utilisateurs", href: "/admin/users", icon: "👥" },
@@ -16,7 +15,7 @@ export default function AdminLayout({ children }) {
 
   return (
     <div style={styles.container}>
-      {/* Sidebar - Design Sombre & Élégant */}
+    
       <aside style={styles.sidebar}>
         <div style={styles.logoArea}>
           <span style={styles.logoIcon}>⚙️</span>
@@ -38,8 +37,6 @@ export default function AdminLayout({ children }) {
             );
           })}
         </nav>
-
-        {/* Pied de la sidebar avec déconnexion */}
         <div style={styles.footer}>
           <div style={styles.divider}></div>
           <Link href="/api/auth/signout" style={styles.logoutBtn}>
@@ -48,9 +45,8 @@ export default function AdminLayout({ children }) {
         </div>
       </aside>
 
-      {/* Zone de contenu principale */}
+      
       <main style={styles.mainContent}>
-        {/* Barre supérieure discrète */}
         <header style={styles.topBar}>
           <div style={styles.breadcrumb}>Administration / {pathname.split('/').pop() || 'Dashboard'}</div>
           <div style={styles.adminBadge}>Admin</div>
@@ -68,12 +64,12 @@ const styles = {
   container: {
     display: "flex",
     minHeight: "100vh",
-    background: "#F4F7FE", // Fond gris très clair pour faire ressortir les cartes
+    background: "#F4F7FE",
     fontFamily: "'Inter', sans-serif, Arial",
   },
   sidebar: {
     width: "280px",
-    background: "#0B1437", // Bleu nuit très pro
+    background: "#0B1437", 
     color: "#FFFFFF",
     display: "flex",
     flexDirection: "column",
@@ -114,8 +110,7 @@ const styles = {
     padding: "12px 15px",
     borderRadius: "12px",
     color: "#FFFFFF",
-    background: "#4318FF", // Surbrillance discrète
-    //borderRight: "4px solid #4318FF", // Barre d'accentuation
+    background: "#4318FF", 
     textDecoration: "none",
     fontSize: "15px",
     fontWeight: "700",

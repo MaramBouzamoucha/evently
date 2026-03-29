@@ -1,13 +1,10 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-
 export default function EditEvent() {
   const router = useRouter();
   const params = useParams();
   const eventId = params?.id;
-
   const [event, setEvent] = useState({
     title: "",
     description: "",
@@ -16,15 +13,11 @@ export default function EditEvent() {
     price: "",
     image: "",
   });
-
   const [preview, setPreview] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // ✅ Fetch event
   useEffect(() => {
     if (!eventId) return;
-
     async function fetchEvent() {
       try {
         const res = await fetch(`/api/events/${eventId}`);
@@ -32,9 +25,7 @@ export default function EditEvent() {
           setError("Erreur lors du chargement");
           return;
         }
-
         const data = await res.json();
-
         setEvent({
           title: data.title || "",
           description: data.description || "",
@@ -43,29 +34,22 @@ export default function EditEvent() {
           price: data.price || "",
           image: data.image || "",
         });
-
         setPreview(data.image);
       } catch {
         setError("Erreur serveur");
       }
     }
-
     fetchEvent();
   }, [eventId]);
-
-  // ✅ handle change
   const handleChange = (e) => {
     setEvent({
       ...event,
       [e.target.name]: e.target.value,
     });
   };
-
-  // ✅ image preview
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onloadend = () => {
       setEvent({ ...event, image: reader.result });
@@ -73,8 +57,6 @@ export default function EditEvent() {
     };
     reader.readAsDataURL(file);
   };
-
-  // ✅ submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -96,10 +78,8 @@ export default function EditEvent() {
     } catch {
       setError("Erreur serveur");
     }
-
     setLoading(false);
   };
-
   return (
     <div className="container">
       <h1>Modifier l'événement</h1>
@@ -153,8 +133,6 @@ export default function EditEvent() {
           {loading ? "Chargement..." : "Modifier"}
         </button>
       </form>
-
-      {/* ✅ CSS DANS LA MÊME PAGE */}
       <style jsx>{`
   .container {
     width: 400px;

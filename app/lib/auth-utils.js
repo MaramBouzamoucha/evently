@@ -2,15 +2,13 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "./auth";
 
-// Récupérer la session côté serveur
 export async function getSession() {
   return await getServerSession(authOptions);
 }
 
-// Forcer l'authentification côté serveur
 export async function requireAuth() {
   const session = await getSession();
-  if (!session) redirect("/login"); // redirection côté serveur
+  if (!session) redirect("/login"); 
   return session;
 }
 export async function requireAdmin() {

@@ -27,7 +27,7 @@ export default async function OrganizerDashboard() {
 
   return (
     <div style={styles.container}>
-      {/* Main content */}
+      
       <div style={styles.main}>
         <header style={styles.topHeader}>
           <div>
@@ -39,7 +39,6 @@ export default async function OrganizerDashboard() {
           </Link>
         </header>
 
-        {/* Stats Section */}
         <div style={styles.statsGrid}>
           <div style={styles.statCard}>
             <div style={{...styles.iconBox, backgroundColor: '#E7E9FB'}}>📅</div>
@@ -58,7 +57,6 @@ export default async function OrganizerDashboard() {
           </div>
         </div>
 
-        {/* Events Section */}
         <div style={styles.sectionHeader}>
           <h2 style={styles.sectionTitle}>Mes événements</h2>
           <div style={styles.line}></div>
@@ -110,7 +108,7 @@ const styles = {
     display: "flex",
     minHeight: "100vh",
     fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    background: "#F4F7FE", // Couleur de fond plus douce (Horizon UI style)
+    background: "#F4F7FE", 
   },
   main: {
     flex: 1,
@@ -136,7 +134,7 @@ const styles = {
     fontSize: "16px",
   },
   addButton: {
-    background: "#4318FF", // Bleu moderne vibrant
+    background: "#4318FF", 
     color: "white",
     border: "none",
     padding: "12px 24px",

@@ -1,7 +1,6 @@
 import { prisma } from "../../lib/prisma";
 import { requireAdmin } from "../../lib/auth-utils";
 import Link from "next/link";
-
 export default async function AdminEventsPage() {
   await requireAdmin();
 
@@ -11,7 +10,7 @@ export default async function AdminEventsPage() {
 
   return (
     <div className="max-w-6xl mx-auto mt-12 p-8 bg-white rounded-2xl shadow-xl">
-      {/* Header */}
+
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-extrabold text-black">
           Gestion des Événements
@@ -23,7 +22,6 @@ export default async function AdminEventsPage() {
         </Link>
       </div>
 
-      {/* Table */}
       {events.length === 0 ? (
         <p className="text-gray-900 text-lg">Aucun événement trouvé.</p>
       ) : (
@@ -53,7 +51,6 @@ export default async function AdminEventsPage() {
                     {event.location || "Non défini"}
                   </td>
                   <td className="px-6 py-3 text-black">
-                    {/* Vérifiez si votre champ s'appelle totalSeats ou capacity dans schema.prisma */}
                     {event.capacity} 
                   </td>
                   <td className="px-6 py-3 text-black font-semibold">

@@ -487,7 +487,6 @@ export default function UserEventsPage() {
   return (
     <div className="events-page">
       <style>{styles}</style>
-      {/* Header */}
       <header className="events-header">
         <div className="events-header-content">
           <div className="events-header-text">
@@ -497,9 +496,8 @@ export default function UserEventsPage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <div className="events-container">
-        {/* Filters */}
+       
         <div className="events-filters">
           <select
             value={filterCategory}
@@ -520,8 +518,6 @@ export default function UserEventsPage() {
             onChange={(e) => setFilterLocation(e.target.value)}
           />
         </div>
-
-        {/* Events Grid */}
         {filteredEvents.length === 0 ? (
           <div className="events-empty">
             Aucun événement ne correspond à vos critères.
@@ -530,7 +526,6 @@ export default function UserEventsPage() {
           <div className="events-grid">
             {filteredEvents.map((event) => (
               <div key={event.id} className="event-card">
-                {/* Image Container */}
                 <div className="event-image-wrapper">
                   <img
                     src={event.image || "https://via.placeholder.com/400"}
@@ -544,8 +539,6 @@ export default function UserEventsPage() {
                     })}
                   </div>
                 </div>
-
-                {/* Content */}
                 <div className="event-content">
                   <div className="event-meta">
                     <span className="event-meta-item">
@@ -556,11 +549,8 @@ export default function UserEventsPage() {
                       {event.location || "Lieu non défini"}
                     </span>
                   </div>
-
                   <h3 className="event-title">{event.title}</h3>
                   <p className="event-description">{event.description}</p>
-
-                  {/* Status or Join Button */}
                   {event.participation ? (
   <div
     className={`event-status ${
@@ -585,8 +575,6 @@ export default function UserEventsPage() {
     Participer
   </button>
 )}
-
-                  {/* Details Link */}
                   <Link href={`/user/events/${event.id}`}>
                     <button className="event-btn event-btn-secondary">
                       Voir plus

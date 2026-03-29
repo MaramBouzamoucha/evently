@@ -3,7 +3,7 @@ import { prisma } from "../../../lib/prisma";
 
 export async function GET(req, { params }) {
   try {
-    // ✅ Correction : Attendre les params
+
     const { id } = await params; 
 
     if (!id) return NextResponse.json({ error: "ID manquant" }, { status: 400 });
@@ -13,7 +13,7 @@ export async function GET(req, { params }) {
   include: {
     category: true,
     organizer: true,
-    participations: true // si tu l’utilises
+    participations: true 
   }
 });
 
@@ -27,7 +27,7 @@ export async function GET(req, { params }) {
 
 export async function PATCH(req, { params }) {
   try {
-    // ✅ Correction : Attendre les params
+
     const { id } = await params; 
     const body = await req.json();
     const { title, description, date, image,capacity,price } = body;

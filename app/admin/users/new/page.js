@@ -12,7 +12,6 @@ export default async function NewUserPage() {
       </h1>
 
       <form action={addUserAction} className="space-y-4">
-        {/* Nom */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Nom</label>
           <input
@@ -22,8 +21,6 @@ export default async function NewUserPage() {
             className=" text-black w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
           />
         </div>
-
-        {/* Email */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
           <input
@@ -34,8 +31,6 @@ export default async function NewUserPage() {
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
           />
         </div>
-
-        {/* Mot de passe */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
           <input
@@ -47,7 +42,6 @@ export default async function NewUserPage() {
           />
         </div>
 
-        {/* Rôle */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Rôle</label>
           <select
@@ -60,7 +54,6 @@ export default async function NewUserPage() {
           </select>
         </div>
 
-        {/* Bouton */}
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md transition"
@@ -72,7 +65,6 @@ export default async function NewUserPage() {
   );
 }
 
-// Action server-side
 async function addUserAction(formData) {
   "use server";
 

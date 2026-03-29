@@ -31,6 +31,7 @@ model Event {
   image       String? 
   price          Float?          // null ou 0 = Gratuit
   capacity       Int?            // null = Illimité
+  placesRestantes   Int
   categoryId   String?
 category     Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 

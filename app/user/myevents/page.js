@@ -20,7 +20,6 @@ export default function MyParticipations() {
       setParticipations(participations.filter(p => p.id !== id));
     }
   };
-
   const getStatusStyle = (status) => {
     if (status === "CONFIRMED") return { color: '#05CD99', background: '#e6fcf5' };
     if (status === "PENDING") return { color: '#FFB547', background: '#fff9e6' };
@@ -59,7 +58,6 @@ export default function MyParticipations() {
   : p.status === "REJECTED"
   ? "Refusé ❌"
   : "En attente ⏳"}
-  
                   </span>
                 </td>
                 <td>

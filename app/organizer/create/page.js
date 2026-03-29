@@ -1,9 +1,7 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
 export default function CreateEvent() {
   const router = useRouter();
   const [title, setTitle] = useState("");
@@ -18,8 +16,6 @@ export default function CreateEvent() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // Récupérer les catégories depuis l'API
   useEffect(() => {
     fetch("/api/categories")
       .then((res) => res.json())
@@ -94,8 +90,6 @@ export default function CreateEvent() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-
-          {/* Ligne 1 : Titre + Date */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Titre</label>
@@ -117,8 +111,6 @@ export default function CreateEvent() {
               />
             </div>
           </div>
-
-          {/* Ligne 2 : Lieu + Catégorie */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black">Lieu</label>

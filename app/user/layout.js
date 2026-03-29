@@ -1,4 +1,4 @@
-"use client"; // Nécessaire pour détecter la page active
+"use client"; 
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function UserLayout({ children }) {
     container: { display: "flex", minHeight: "100vh", background: "#F4F7FE", fontFamily: "'Plus Jakarta Sans', sans-serif" },
     sidebar: { 
       width: "280px", 
-      background: "#111C44", // Bleu nuit profond pour casser le blanc
+      background: "#111C44", 
       color: "white", 
       padding: "40px 20px", 
       display: "flex", 
@@ -37,8 +37,8 @@ export default function UserLayout({ children }) {
       fontSize: "15px",
       fontWeight: isActive ? "700" : "500",
       transition: "0.3s",
-      color: isActive ? "#FFFFFF" : "#A3AED0", // Gris doux pour inactif, blanc pour actif
-      background: isActive ? "linear-gradient(135deg, #4318FF 0%, #5E35FF 100%)" : "transparent", // Dégradé bleu pour actif
+      color: isActive ? "#FFFFFF" : "#A3AED0",
+      background: isActive ? "linear-gradient(135deg, #4318FF 0%, #5E35FF 100%)" : "transparent", 
       boxShadow: isActive ? "0px 10px 20px rgba(67, 24, 255, 0.15)" : "none",
     }),
     icon: { marginRight: "12px", fontSize: "18px" },
@@ -50,7 +50,7 @@ export default function UserLayout({ children }) {
     logout: { 
       display: "flex", 
       alignItems: "center", 
-      color: "#FF5B5B", // Rouge doux
+      color: "#FF5B5B", 
       textDecoration: "none", 
       fontWeight: "700", 
       padding: "16px",
@@ -60,7 +60,6 @@ export default function UserLayout({ children }) {
 
   return (
     <div style={sidebarStyles.container}>
-      {/* SIDEBAR */}
       <aside style={sidebarStyles.sidebar}>
         <div style={sidebarStyles.logo}>EVENTLY<span style={{color: '#4318FF'}}>.</span></div>
         <nav style={sidebarStyles.nav}>
@@ -77,11 +76,8 @@ export default function UserLayout({ children }) {
           <Link href="/api/auth/signout" style={sidebarStyles.logout}>🚪 Se déconnecter</Link>
         </div>
       </aside>
-
-      {/* PAGE CONTENT */}
       <main style={{ flex: 1, marginLeft: "280px", padding: "40px" }}>
         <SessionProvider>
-          {/* TopBar Optionnelle */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
             <div>
               <p style={{ color: "#707EAE", fontSize: "14px", margin: 0 }}>Espace Utilisateur</p>

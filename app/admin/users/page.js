@@ -12,7 +12,6 @@ export default async function AdminUsersPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Gestion des utilisateurs</h1>
         <Link href="/admin/users/new">
@@ -22,7 +21,6 @@ export default async function AdminUsersPage() {
         </Link>
       </div>
 
-      {/* Table */}
       {users.length === 0 ? (
         <p className="text-gray-600">Aucun utilisateur trouvé.</p>
       ) : (

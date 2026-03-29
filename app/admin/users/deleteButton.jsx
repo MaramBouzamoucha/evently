@@ -14,7 +14,7 @@ export default function DeleteButton({ id }) {
       });
 
       if (res.ok) {
-        // C'est ICI qu'on rafraîchit la page côté client
+       
         router.refresh(); 
       } else {
         alert("Erreur lors de la suppression");

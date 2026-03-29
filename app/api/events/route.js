@@ -38,7 +38,6 @@ export async function GET() {
 
 export async function PATCH(req, { params }) {
   try {
-    // ✅ Correction : Attendre les params
     const { id } = await params; 
     const body = await req.json();
     const { title, description, date, image,capacity,price } = body;

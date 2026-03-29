@@ -1,11 +1,8 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 export default function NewEventPage() {
   const router = useRouter();
-
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -17,8 +14,6 @@ export default function NewEventPage() {
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Récupérer les catégories depuis l'API
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -33,7 +28,6 @@ export default function NewEventPage() {
     };
     fetchCategories();
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -44,7 +38,6 @@ export default function NewEventPage() {
       setLoading(false);
       return;
     }
-
     try {
       const res = await fetch("/api/events/create", {
         method: "POST",
@@ -60,23 +53,19 @@ export default function NewEventPage() {
           image,
         }),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         setError(data.message || "Une erreur est survenue");
         setLoading(false);
         return;
       }
-
-      router.push("/admin/events"); // Redirection après création
+      router.push("/admin/events"); 
     } catch (err) {
       console.error(err);
       setError("Erreur serveur, réessayez plus tard");
       setLoading(false);
     }
   };
-
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-gray-50 rounded-2xl shadow-lg">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Ajouter un nouvel événement</h1>

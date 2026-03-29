@@ -1,4 +1,4 @@
-"use client"; // Indispensable pour le clic
+"use client"; 
 import { useRouter } from "next/navigation";
 
 export default function DeleteButton({ eventId }) {
@@ -12,14 +12,14 @@ export default function DeleteButton({ eventId }) {
     });
 
     if (res.ok) {
-      router.refresh(); // Recharge les données sans changer de page
+      router.refresh(); 
     } else {
       alert("Erreur lors de la suppression");
     }
   };
 
   return (
-    // Dans deleteButton.js
+    
 <button 
   onClick={handleDelete}
   style={{

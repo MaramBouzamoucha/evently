@@ -84,7 +84,6 @@ export default function EditEventPage() {
     container: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', fontFamily: 'Arial', backgroundColor: '#f4f7fe' },
     card: { backgroundColor: '#fff', borderRadius: '20px', padding: '40px', maxWidth: '600px', width: '100%', boxShadow: '0 5px 15px rgba(0,0,0,0.1)' },
     label: { display: 'block', marginBottom: '6px', fontWeight: '600', color: '#2b3674' },
-    // ✅ Ajout explicite de color: 'black' ici
     input: { width: '100%', padding: '12px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #ccc', outline: 'none', color: 'black' },
     textarea: { width: '100%', padding: '12px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #ccc', outline: 'none', minHeight: '100px', color: 'black' },
     fileInputContainer: { padding: '12px', border: '2px dashed #ccc', borderRadius: '8px', marginBottom: '20px', textAlign: 'center', cursor: 'pointer', color: 'black' },
@@ -108,7 +107,6 @@ export default function EditEventPage() {
           <label style={styles.label}>Description</label>
           <textarea style={styles.textarea} value={description} onChange={(e) => setDescription(e.target.value)} />
 
-          {/* ✅ Correction : Utilisation de <input> au lieu de <text> et lien avec la bonne variable */}
           <label style={styles.label}>Capacité</label>
           <input type="number" style={styles.input} value={capacity} onChange={(e) => setCapacity(e.target.value)} />
 

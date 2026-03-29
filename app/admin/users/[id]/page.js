@@ -1,18 +1,14 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-
 export default function EditUserPage() {
   const router = useRouter();
   const params = useParams();
   const userId = params.id;
-
   const [user, setUser] = useState({ name: "", email: "", role: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Récupérer l'utilisateur
   useEffect(() => {
     if (!userId) return;
 
@@ -34,13 +30,11 @@ export default function EditUserPage() {
     fetchUser();
   }, [userId]);
 
-  // Gestion des inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  // Envoi des modifications
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");

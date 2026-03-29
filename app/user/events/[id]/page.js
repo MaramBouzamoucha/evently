@@ -7,7 +7,6 @@ import { getSession } from "next-auth/react";
 export default function EventDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
-
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -15,7 +14,6 @@ export default function EventDetailsPage() {
   const [userParticipation, setUserParticipation] = useState(null);
   const [myParticipations, setMyParticipations] = useState([]);
 
-  // 🔹 Récupérer la session utilisateur
   useEffect(() => {
     async function fetchUser() {
       const session = await getSession();
@@ -24,7 +22,7 @@ export default function EventDetailsPage() {
     fetchUser();
   }, []);
 
-  // 🔹 Récupérer l'événement
+
   useEffect(() => {
     async function fetchEvent() {
       try {
@@ -41,7 +39,6 @@ export default function EventDetailsPage() {
     if (id) fetchEvent();
   }, [id]);
 
-  // 🔹 Vérifier la participation de l'utilisateur
   useEffect(() => {
   async function fetchMyParticipations() {
     const res = await fetch("/api/participations");
@@ -60,7 +57,7 @@ useEffect(() => {
   setUserParticipation(participation || null);
 }, [event, myParticipations]);
 console.log("Participation ID:", userParticipation?.id);
-  // 🔹 Annuler la participation
+  
   const handleCancel = async () => {
   if (!userParticipation) return;
 
@@ -110,8 +107,6 @@ console.log("Participation ID:", userParticipation?.id);
           </div>
 
           <p style={styles.description}>{event.description}</p>
-
-          {/* 🔹 Bouton Annuler si inscrit */}
           {userParticipation && (
   <>
     <div

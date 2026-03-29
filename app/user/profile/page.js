@@ -1,18 +1,12 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-
 export default function ProfilePage() {
   const { data: session, update } = useSession();
   const [name, setName] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // Synchroniser l'état local avec la session au chargement
   useEffect(() => {
-  // On ne synchronise que si on n'est pas en train d'éditer 
-  // et que la session contient effectivement quelque chose
   if (session?.user?.name && !isEditing) {
     setName(session.user.name);
   }
@@ -34,23 +28,17 @@ export default function ProfilePage() {
         setLoading(false);
         return;
       }
-
-      const data = await res.json(); // { user: updatedUser }
+      const data = await res.json();
       const updatedUser = data.user;
-
-      // Mettre à jour la session côté client
       await update({
         ...session,
         user: {
           ...session.user,
-          name: updatedUser.name,  // prend le nom depuis la BDD
+          name: updatedUser.name,  
         },
       });
-
-      // Mettre à jour l'état local pour re-render immédiat
       setName(updatedUser.name);
       setIsEditing(false);
-
     } catch (err) {
       console.error(err);
       alert("Erreur serveur");
@@ -58,9 +46,7 @@ export default function ProfilePage() {
       setLoading(false);
     }
   };
-
   if (!session) return <p style={{ textAlign: "center", marginTop: "50px" }}>Chargement du profil...</p>;
-
   return (
     <div style={{ maxWidth: "600px", margin: "50px auto", padding: "20px", fontFamily: "Segoe UI, sans-serif" }}>
       <div style={{ backgroundColor: "white", borderRadius: "20px", padding: "40px", boxShadow: "0 10px 25px rgba(0,0,0,0.05)", textAlign: "center" }}>

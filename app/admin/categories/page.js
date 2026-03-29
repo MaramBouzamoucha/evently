@@ -4,10 +4,7 @@ import { revalidatePath } from "next/cache";
 
 export default async function AdminCategoriesPage() {
   await requireAdmin();
-
   const categories = await prisma.category.findMany({ orderBy: { name: "asc" } });
-
-  // Action pour ajouter une catégorie
   async function addCategory(formData) {
     "use server";
     const name = formData.get("name") ;
@@ -16,8 +13,6 @@ export default async function AdminCategoriesPage() {
       revalidatePath("/admin/categories");
     }
   }
-
-  // Action pour supprimer
   async function deleteCategory(formData) {
     "use server";
     const id = formData.get("id") ;
@@ -28,8 +23,6 @@ export default async function AdminCategoriesPage() {
   return (
     <div className="max-w-4xl mx-auto mt-12 p-8 bg-white rounded-2xl shadow-xl">
       <h1 className="text-3xl font-bold text-black mb-8">Gestion des Catégories</h1>
-
-      {/* Formulaire d'ajout */}
       <form action={addCategory} className="flex gap-4 mb-8">
         <input 
           name="name" 
@@ -41,8 +34,6 @@ export default async function AdminCategoriesPage() {
           Ajouter
         </button>
       </form>
-
-      {/* Liste des catégories */}
       <div className="border border-gray-200 rounded-lg overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-100 border-b border-gray-200">

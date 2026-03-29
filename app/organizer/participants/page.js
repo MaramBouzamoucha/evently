@@ -6,7 +6,6 @@ export default function OrganizerParticipants() {
   const [participations, setParticipations] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Calcul des statistiques
   const stats = {
     total: participations.length,
     pending: participations.filter(p => p.status === "PENDING").length,
@@ -46,12 +45,12 @@ export default function OrganizerParticipants() {
   const styles = {
     container: { padding: '40px', backgroundColor: '#f4f7fe', minHeight: '100vh', fontFamily: 'sans-serif' },
     card: { backgroundColor: 'white', borderRadius: '25px', padding: '30px', boxShadow: '0 10px 20px rgba(0,0,0,0.05)' },
-    // Styles pour les statistiques
+    
     statsContainer: { display: 'flex', gap: '20px', marginBottom: '30px' },
     statCard: { backgroundColor: 'white', padding: '20px', borderRadius: '20px', flex: 1, boxShadow: '0 10px 20px rgba(0,0,0,0.05)', textAlign: 'center' },
     statLabel: { color: '#a3aed0', fontSize: '14px', fontWeight: '600' },
     statValue: { fontSize: '24px', fontWeight: 'bold', color: '#2b3674', marginTop: '5px' },
-    // Table
+    
     table: { width: '100%', borderCollapse: 'collapse' },
     th: { textAlign: 'left', color: '#a3aed0', fontSize: '14px', borderBottom: '1px solid #f4f7fe', padding: '15px' },
     td: { padding: '15px', color: '#2b3674', borderBottom: '1px solid #f4f7fe' },
@@ -69,8 +68,6 @@ export default function OrganizerParticipants() {
   return (
     <div style={styles.container}>
       <h1 style={{ color: '#2b3674', marginBottom: '30px' }}>Gestion des Participants 👥</h1>
-
-      {/* SECTION STATISTIQUES (Doit être dans le return) */}
       <div style={styles.statsContainer}>
         <div style={styles.statCard}>
           <span style={styles.statLabel}>Total Demandes</span>
@@ -85,8 +82,6 @@ export default function OrganizerParticipants() {
           <div style={{ ...styles.statValue, color: '#05CD99' }}>{stats.confirmed}</div>
         </div>
       </div>
-
-      {/* TABLEAU DES PARTICIPANTS */}
       <div style={styles.card}>
         <table style={styles.table}>
           <thead>

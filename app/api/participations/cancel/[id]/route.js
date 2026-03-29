@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../lib/prisma"; // adapte le chemin si nécessaire
+import { prisma } from "../../../../lib/prisma";
 
 export async function DELETE(req, { params }) {
   try {
@@ -15,9 +15,19 @@ export async function DELETE(req, { params }) {
       return NextResponse.json({ error: "Participation introuvable" }, { status: 404 });
     }
 
-    await prisma.participation.delete({
-      where: { id },
-    });
+    await prisma.$transaction([
+  prisma.participation.delete({
+    where: { id },
+  }),
+  prisma.event.update({
+    where: { id: participation.eventId },
+    data: {
+      placesRestantes: {
+        increment: 1
+      }
+    }
+  })
+]);
 
     return NextResponse.json({ success: true, message: "Participation annulée" });
   } catch (error) {

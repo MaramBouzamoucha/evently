@@ -1,4 +1,4 @@
-"use client"; // Nécessaire pour détecter la page active
+"use client"; 
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -16,7 +16,7 @@ export default function OrganizerLayout({ children, session }) {
     container: { display: "flex", minHeight: "100vh", background: "#F4F7FE", fontFamily: "sans-serif" },
     sidebar: { 
       width: "280px", 
-      background: "#111C44", // Bleu nuit profond pour casser le blanc
+      background: "#111C44", 
       color: "white", 
       padding: "40px 20px", 
       display: "flex", 

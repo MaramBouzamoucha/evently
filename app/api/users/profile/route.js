@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth";
 import { prisma } from "../../../lib/prisma";
 
-// GET : Récupérer les infos du profil
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -20,7 +19,7 @@ export async function GET() {
         email: true,
         role: true,
         createdAt: true,
-        // On ne sélectionne PAS le password pour la sécurité
+        
       },
     });
 
@@ -31,7 +30,6 @@ export async function GET() {
   }
 }
 
-// PATCH : Mettre à jour le nom ou le profil
 export async function PATCH(req) {
   try {
     const session = await getServerSession(authOptions);
