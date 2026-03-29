@@ -177,11 +177,24 @@ export default function CreateEvent() {
           </div>
 
           {/* Image */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            {preview && <img src={preview} alt="preview" className="mt-2 w-full max-h-64 object-cover rounded-lg text-black" />}
-          </div>
+          {/* Image URL */}
+<div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture (URL)</label>
+  <input
+    type="url"
+    placeholder="https://exemple.com/mon-image.jpg"
+    value={image || ""}
+    onChange={(e) => setImage(e.target.value)}
+    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black"
+  />
+  {image && (
+    <img
+      src={image}
+      alt="preview"
+      className="mt-2 w-full max-h-64 object-cover rounded-lg text-black"
+    />
+  )}
+</div>
 
           {/* Boutons */}
           <div className="flex justify-between items-center mt-4">
